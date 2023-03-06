@@ -1,0 +1,16 @@
+@import './partials/base';
+@import './partials/colors';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+   outline: 1px solid black;
+}
+body {
+   background: rgb(205, 202, 202);
+}
+.margin {
+   
+}
