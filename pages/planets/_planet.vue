@@ -1,7 +1,9 @@
 <template>
-   <div>
-      {{ planet }}
-   </div>
+   <main 
+      class="relative"  
+   >
+
+   </main>
 </template>
 
 <script>
@@ -9,6 +11,12 @@
 
    export default {
       name: 'planet',
+
+      head() {
+         return {
+            title: `Planets Fact | ${this.planet[0].name}`
+         }       
+      },
 
       async asyncData({ params }) {
          const planetName = params.planet
@@ -23,7 +31,7 @@
       data() {
          
       },
-
+   
       computed: {
          planets() {
             return this.$store.state.planets 

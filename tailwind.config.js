@@ -33,12 +33,15 @@ module.exports = {
          'pf-desat-red': '#D83A34',   
          'pf-desat-orange': '#CD5120',   
          'pf-sea-green': '#1EC1A2',  
-         'pf-blue': '#2D68F0',   
+         'pf-blue': '#2D68F0',
+         'pf-border1': 'rgba(255, 255, 255, 0.089)',   
+         'pf-border2': 'rgba(255, 255, 255, 0.2)',   
+         'pf-inactive': 'rgba(255, 255, 255, 0.5)'
       },
 
       fontFamily: {
          antonio: ['Antonio', 'sans-serif'],
-         spartan: ['Spartan', 'sans-serif']
+         spartan: ['League Spartan', 'sans-serif']
       }
     },
   },

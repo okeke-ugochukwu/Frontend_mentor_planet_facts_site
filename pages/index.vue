@@ -1,7 +1,7 @@
 <template>
    <main>
-      <headerBar />
-      {{ planets }}
+
+      <router-view />
    </main>
 </template>
 
@@ -33,6 +33,10 @@
             this.$store.state.planets.length === 0?
                GET_PLANETS(this.$store) : console.log('Data in store')
          }
+      },
+
+      mounted () {
+         this.$router.push('/planets/earth');
       },
    }
 </script>
