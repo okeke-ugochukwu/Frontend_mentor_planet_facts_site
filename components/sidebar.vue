@@ -1,7 +1,8 @@
 <template>
    <nav 
       class="
-         h-[calc(100vh-86px)] pt-6 w-full ml-[-100%]
+         absolute top-[68px]
+         h-[calc(100vh-68px)] pt-6 w-full ml-[-100%]
       "
       :class="{'open': sideBar.isShown}"
    >  
@@ -17,13 +18,10 @@
                   tracking-[1.36px] leading-[25px] text-[15px]
                "
                @click="goToPage(planet.name)"
-            >
+            >  
                <nuxt-link 
                   :to="`/planets/${planet.name.toLowerCase()}`"
-                  class="
-                     flex justify-between items-center py-[20px] 
-                  "
-                  
+                  class="flex justify-between items-center py-[20px]"    
                >
 
                   <span class="flex items-center">
@@ -55,6 +53,13 @@
 <script>
    export default {
       name: 'sideBar',
+
+      props: {
+         activeSubHeading: {
+            type: Number,
+            default: 1
+         },
+      },
 
       computed: {
          planets() {

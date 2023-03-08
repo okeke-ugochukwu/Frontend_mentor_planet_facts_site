@@ -1,5 +1,7 @@
 # Frontend Mentor - Planets Fact Site
 
+<!-- ![Design preview for the Planets fact site coding challenge](./src/assets/imgs/preview.jpg) -->
+
 ```bash
 # install dependencies
 $ npm install

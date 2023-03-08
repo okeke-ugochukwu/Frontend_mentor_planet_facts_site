@@ -6,12 +6,10 @@
 @tailwind utilities;
 
 * {
-//    outline: 1px solid black;
+   outline: 1px solid black;
    transition: .3s;
 }
 body {
    background: rgb(205, 202, 202);
 }
-.margin {
-   
-}
+ 

@@ -1,9 +1,9 @@
 <template>
-   <main 
-      class="relative"  
-   >
-
-   </main>
+   <div>
+      <subHeaderBar 
+         :color="planet[0].assets_color"
+      />
+   </div>
 </template>
 
 <script>
@@ -29,7 +29,9 @@
       },
 
       data() {
-         
+         return {
+            
+         }
       },
    
       computed: {
@@ -39,7 +41,7 @@
 
          planet() {
             return this.planets.filter(planet => planet.name.toLowerCase() === this.planetName)
-         }
+         },
       },
 
       methods: {
