@@ -9,7 +9,7 @@
          "
       >
          <button
-            v-for="item in subHeading" :key="item"
+            v-for="item in subHeadings" :key="item"
             class="
                py-5 w-[80px] font-bold tracking-[1.93px]
                text-[9px] text-pf-inactive hover:text-white
@@ -42,7 +42,7 @@
 
       data() {
          return {
-            subHeading: ['overview', 'structure', 'surface']
+            subHeadings: ['overview', 'structure', 'surface']
          }
       },
    }
