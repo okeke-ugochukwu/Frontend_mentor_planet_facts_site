@@ -175,7 +175,7 @@
     "revolution": "84 Years",
     "radius": "25,362 KM",
     "temperature": "-195°c",
-    "images": {
+    "images": {      
       "planet": "uranus-planet",
       "internal": "uranus-internal",
       "geology": "uranus-geology.png"

@@ -1,6 +1,3 @@
-
-import SubHeaderBar from '../components/subHeaderBar.vue';
-
 <template>
   <div class="relative">
       <headerBar />
@@ -15,7 +12,9 @@ import SubHeaderBar from '../components/subHeaderBar.vue';
 <script>
    export default {
       data() {
-      
+         return {
+            
+         }
       },
    }
 </script>

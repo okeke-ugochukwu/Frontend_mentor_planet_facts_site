@@ -25,6 +25,7 @@ module.exports = {
       colors: {
          'pf-deep-blue': '#070724',
          'pf-desat-grey': '#38384F',
+         'pf-desat-grey2': '#D8D8D8',
          'pf-grey': '#838391',
          'pf-desat-teal': '#419EBB',   
          'pf-deep-cream': '#EDA249',   

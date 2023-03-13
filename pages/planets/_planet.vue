@@ -2,6 +2,8 @@
    <div>
       <subHeaderBar 
          :color="planet.assets_color"
+         :tab="activeTab"
+         @UPDATE_TAB_IN_VIEW="UPDATE_TAB_IN_VIEW"
       />
 
       <main>
@@ -9,14 +11,14 @@
          <!-- MARGIN -->
          <div
             class="
-               margin w-[87.2%] max-w-[500px] m-auto flex justify-between items-center
+               margin w-[87.2%] max-w-[500px] m-auto flex flex-col justify-between items-center
                md:max-w-none xl:w-[77.083%]
             "
          >
 
             <!-- PLANET IMAGE + DESCR & TABS -->
             <div
-               class="w-full lg:flex lg:justify-between"
+               class="w-full mb-7 lg:mb-[27px] lg:flex lg:justify-between "
             >
 
                <!-- IMAGE -->
@@ -65,18 +67,19 @@
                      </h1>
 
                      <p
+                        ref="tabContent"
                         class="
-                           font-spartan font-norml; text-[11px] leading-[22px] mb-8
+                           font-spartan font-normal text-[14px] leading-[22px] mb-8
                            lg:text-[18px] lg:leading-[25px] lg:mb-6
                         "
                      >
-                        {{ planet.overview.content }}
+                        {{ planet[activeTab].content }}
                      </p>
 
                      <a 
-                        href=""
+                        :href="planet[activeTab].source"
                         class="
-                           w-max m-auto flex items-center text-xs leading-[25px] opacity-50 font-normal
+                           w-max m-auto flex items-center text-sm leading-[25px] opacity-50 font-normal
                            md:m-0 lg:text-sm
                         "
                      >
@@ -102,22 +105,52 @@
                      <button
                         v-for="item in subHeadings" :key="item.id"
                         class="
-                           font-spartan font-bold text-white text-[9px] leading-[25px] tracking-[1.93px] px-5 
+                           tab-controls
+                           font-spartan font-bold text-white text-[10px] leading-[25px] tracking-[1.93px] px-5 
                            w-full border-solid border-pf-border2 border-[1px] text-left h-[40px]
-                           lg:text-sm lg:tracking-[2.57px]
+                           lg:text-xs lg:tracking-[2.57px]
                         "
+                        @click="UPDATE_TAB_IN_VIEW(item)"
+                        :style="{ 'background': CHECK_ACTIVE_TAB(item) }"
                      >
-                     <span class="mr-[17px]">{{ item.id }}</span>
-                      <span>{{ item.heading.toUpperCase() }}</span>
+                        <span class="mr-[17px] opacity-50">{{ item.id }}</span>
+                        <span>{{ item.heading.toUpperCase() }}</span>
                      </button>
                   </div>
 
                </div>
+
             </div>
 
             <!-- PLANET PROPERTIES -->
-            <div>
+            <div class="w-full flex flex-col gap-2 mb-[47px] md:flex-row md:gap-[30px] md:mb-[36px] lg:mb-[56px]">
+               <div
+                  v-for="property in Object.entries(planetProperties)" :key="property[0]"
+                  class="
+                     w-full text-white flex justify-between items-center [&>span]:h-max
+                     h-12 border-[1px] border-pf-border2 border-solid px-6
+                     md:flex-col md:h-[88px] md:px-[15px] md:justify-start md:items-start
+                     md:pt-4 md:gap-[6px] lg:pr-0 lg:h-[128px] lg:pt-5 lg:pl-[23px]
+                  "
+               >
+                  <span class="
+                     opacity-50 font-spartan font-bold text-[10px] leading-4 tracking-[0.73px] 
+                     lg:text-[11px] lg:tracking-[1px]
+                  "
+                  >
+                     {{ property[0].replace('_', ' ').toUpperCase() }}
+                  </span>
 
+                  <span 
+                     class="
+                     font-antonio font-medium text-[20px] h-12 
+                     md:text-[24px] md:leading-[25.88px] tracking-[-0.75px]
+                     lg:text-[40px] lg:leading-[51.76px] lg:tracking-[-1.5px]
+                     "
+                  >
+                     {{ property[1].replace('_', ' ').toUpperCase() }}
+                  </span>
+               </div>
             </div>
             
          </div>
@@ -128,6 +161,7 @@
 
 <script>
    import GET_PLANETS from '@/modules/planetsGetter.js'
+import { setTimeout } from 'timers'
 
    export default {
       name: 'planet',
@@ -150,11 +184,12 @@
 
       data() {
          return {
-            tabInView: 3,
+            activeTab: 'overview',
+
             subHeadings: [
-               {id: '01', heading: 'overview'}, 
-               {id: '02', heading: 'internal structure'},
-               {id: '03', heading: 'surface geology'}
+               {id: '01', heading: 'overview', isActive: true}, 
+               {id: '02', heading: 'internal structure', isActive: false},
+               {id: '03', heading: 'surface geology', isActive: false}
             ]
          }
       },
@@ -167,6 +202,15 @@
          planet() {
             return this.planets.filter(planet => planet.name.toLowerCase() === this.planetName)[0]
          },
+
+         planetProperties() {
+            return {
+               rotation_time: this.planet.rotation,
+               revolution_time: this.planet.revolution,
+               radius: this.planet.radius,
+               'average_temp.': this.planet.temperature,
+            }
+         }
       },
 
       methods: {
@@ -174,8 +218,60 @@
             //CHECK IF THERES DATA IN STATE THEN  ACT ACCORDINGLY
             this.$store.state.planets.length === 0?
                GET_PLANETS(this.$store) : console.log('Data in store')
+         },
+         
+         UPDATE_TAB_IN_VIEW(tabObject) {
+
+            //CHECK IF TAB IS ALREAY ACTIVE
+            if(tabObject.heading.includes(this.activeTab)) {
+               console.log('Tab already in view')
+            }
+            else {
+               //TURN OFF ACTIVE STATUS FOR ALL HEADINGS
+               this.subHeadings.forEach(heading => {
+                  heading.isActive = false
+               });
+
+               //TURN ON ACTIVE STATUS FOR HEADING BOUND TO THE EVENT'S ORIGIN BUTTON
+               var summonedHeading = this.subHeadings.find(object => object.heading.includes(tabObject.heading))
+               summonedHeading.isActive = true
+
+               //FADE OUT THE CONTENT PARAGRAPH
+               setTimeout(() => {
+                  this.$refs.tabContent.style.opacity = '0'
+               }, 100)
+
+               //CHANGE TAB > CHANGES CONTENT. FADE IN PARAGRAPH
+               setTimeout(() => {
+                  switch (true) {
+                     case tabObject.heading.includes('overview'):
+                        this.activeTab = 'overview'
+                        this.$refs.tabContent.style.opacity = '1'
+                        break;
+
+                     case tabObject.heading.includes('structure'):
+                        this.activeTab = 'structure'
+                        this.$refs.tabContent.style.opacity = '1'
+                        break;
+                  
+                     case tabObject.heading.includes('surface'):
+                        this.activeTab = 'geology'
+                        this.$refs.tabContent.style.opacity = '1'
+                        break;
+                  }
+               }, 500)
+            }
+         },
+
+         CHECK_ACTIVE_TAB(subHeadingObject) {
+            if (subHeadingObject.isActive) {
+               return this.planet.assets_color
+            }
+            else {
+               return 'transparent'
+            }
          }
-      }
+      },
    }
 </script>
 
