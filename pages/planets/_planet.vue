@@ -18,31 +18,71 @@
 
             <!-- PLANET IMAGE + DESCR & TABS -->
             <div
-               class="w-full mb-7 lg:mb-[27px] lg:flex lg:justify-between "
+               class="w-full mb-7 lg:mb-[87px] lg:flex lg:justify-between"
             >
 
                <!-- IMAGE -->
                <div 
                   class="
+                     relative
                      h-[304px] flex justify-center items-center
-                     md:h-[460px] lg:h-[541px] lg:w-[calc(100%-300px)]
+                     md:h-[460px] lg:h-[541px] lg:w-[calc(100%-300px)] 
                      xl:w-[calc(100%-350px)]
                   "
                >
-                  <picture class="xl:ml-[-130px]">
-                     <source 
-                        media="(min-width: 1024px)" 
-                        :srcset="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.planet}-desktop.svg`)"
-                     >
-                     <source 
-                        media="(min-width: 768px)" 
-                        :srcset="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.planet}-tab.svg`)"
-                     >
-                     <img 
-                        :src="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.planet}-mobile.svg`)" 
-                        alt=""
-                     >                     
-                  </picture>
+                  <div 
+                     class="relative w-max flex justify-center items-center flex-col"
+                  >
+                     <!-- PLANET OVERVIEW -->
+                     <picture class="xl:ml-[-130px]">
+                        <source 
+                           media="(min-width: 1024px)" 
+                           :srcset="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.planet}-desktop.svg`)"
+                        >
+                        <source 
+                           media="(min-width: 768px)" 
+                           :srcset="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.planet}-tab.svg`)"
+                        >
+                        <img 
+                           :src="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.planet}-mobile.svg`)" 
+                           :alt="`${planet.name.toLowerCase()}`"
+                        >                     
+                     </picture>
+
+                     <!-- PLANET STRUCTURE -->
+                     <transition name="fade">
+                        <picture class="xl:ml-[-130px] absolute top-0 bottom-0 right-0 h-full" v-if="activeTab.includes('structure')">
+                           <source 
+                              media="(min-width: 1024px)" 
+                              :srcset="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.internal}-desktop.svg`)"
+                           >
+                           <source 
+                              media="(min-width: 768px)" 
+                              :srcset="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.internal}-tab.svg`)"
+                           >
+                           
+                           <img 
+                              :src="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.internal}-mobile.svg`)" 
+                              :alt="`${planet.name.toLowerCase()}'s structure'`"
+                           >                
+                        </picture>
+                     </transition>
+
+                     <!-- PLANET SURFACE GEOLOGY -->
+                     <transition name="slideFade">
+                        <img 
+                           v-if="activeTab.includes('geology')"
+                           :src="require(`@/assets/imgs/${planet.name.toLowerCase()}/${planet.images.geology}`)" 
+                           :alt="`${planet.name.toLowerCase()}'s_surface'`"
+                           class="
+                              absolute w-[70px] mt-[150px] 
+                              md:w-[100px] md:mt-[230px]
+                              lg:w-[163px] lg:mt-[370px]
+                              xl:ml-[-130px] 
+                           "
+                        >
+                     </transition>
+                  </div>
                </div>
 
                <!-- DESCR & TABS -->
@@ -60,6 +100,7 @@
                         class="
                            font-antonio font-medium text-[40px] leading-[51.76px] mb-4
                            md:text-5xl md:leading-[62.11px]
+                           lg:mb-[23px]
                            xl:text-[80px] xl:leading-[103.52px]
                         "
                      >
@@ -108,7 +149,7 @@
                            tab-controls
                            font-spartan font-bold text-white text-[10px] leading-[25px] tracking-[1.93px] px-5 
                            w-full border-solid border-pf-border2 border-[1px] text-left h-[40px]
-                           lg:text-xs lg:tracking-[2.57px]
+                           lg:text-[13px] lg:tracking-[2.57px] hover:bg-pf-desat-grey2 lg:h-12
                         "
                         @click="UPDATE_TAB_IN_VIEW(item)"
                         :style="{ 'background': CHECK_ACTIVE_TAB(item) }"
@@ -123,19 +164,24 @@
             </div>
 
             <!-- PLANET PROPERTIES -->
-            <div class="w-full flex flex-col gap-2 mb-[47px] md:flex-row md:gap-[30px] md:mb-[36px] lg:mb-[56px]">
+            <div 
+               class="
+                  w-full flex flex-col gap-2 mb-[47px] 
+                  md:flex-row md:gap-[30px] md:mb-[36px] lg:mb-[56px]
+                  "
+               >
                <div
                   v-for="property in Object.entries(planetProperties)" :key="property[0]"
                   class="
                      w-full text-white flex justify-between items-center [&>span]:h-max
                      h-12 border-[1px] border-pf-border2 border-solid px-6
                      md:flex-col md:h-[88px] md:px-[15px] md:justify-start md:items-start
-                     md:pt-4 md:gap-[6px] lg:pr-0 lg:h-[128px] lg:pt-5 lg:pl-[23px]
+                     md:pt-4 md:gap-[6px] lg:pr-0 lg:h-[128px] lg:pt-5 lg:pl-[23px] lg:gap-[4px]
                   "
                >
                   <span class="
                      opacity-50 font-spartan font-bold text-[10px] leading-4 tracking-[0.73px] 
-                     lg:text-[11px] lg:tracking-[1px]
+                     lg:text-[14px] lg:leading-[25px] lg:tracking-[1px]
                   "
                   >
                      {{ property[0].replace('_', ' ').toUpperCase() }}
@@ -161,7 +207,7 @@
 
 <script>
    import GET_PLANETS from '@/modules/planetsGetter.js'
-import { setTimeout } from 'timers'
+   import { setTimeout } from 'timers'
 
    export default {
       name: 'planet',
@@ -215,9 +261,11 @@ import { setTimeout } from 'timers'
 
       methods: {
          SET_STATE() {
+
             //CHECK IF THERES DATA IN STATE THEN  ACT ACCORDINGLY
             this.$store.state.planets.length === 0?
                GET_PLANETS(this.$store) : console.log('Data in store')
+               
          },
          
          UPDATE_TAB_IN_VIEW(tabObject) {
@@ -261,6 +309,7 @@ import { setTimeout } from 'timers'
                   }
                }, 500)
             }
+
          },
 
          CHECK_ACTIVE_TAB(subHeadingObject) {
@@ -268,10 +317,35 @@ import { setTimeout } from 'timers'
                return this.planet.assets_color
             }
             else {
-               return 'transparent'
+               return ''
             }
          }
       },
    }
 </script>
 
+<style scss scoped>
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .5s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+   
+
+.slideFade-enter-active,
+.slideFade-leave-active {
+  transition: all .5s ease;
+}
+
+.slideFade-enter,
+.slideFade-leave-to {
+  opacity: 0;
+  margin-bottom: -15px;
+}
+   
+</style>

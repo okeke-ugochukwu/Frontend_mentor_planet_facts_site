@@ -10,9 +10,9 @@
       <!-- MARGIN -->
       <div 
          class="
-            margin w-[87.2%] m-auto flex justify-between items-center
+            margin w-[87.2%] h-full m-auto flex justify-between items-center
             md:justify-center md:flex-col
-            lg:w-[93%] lg:flex-row lg:justify-between
+            lg:w-[93.8%] lg:flex-row lg:justify-between
          "
       >
          <!-- SITE PIN -->
@@ -30,29 +30,37 @@
          <!-- MAIN NAVIGATION -->
          <nav 
             class="
-               hidden md:flex pt-[39px] pb-[27px]
-               w-full lg:py-0 lg:w-max
+               hidden md:flex 
+               w-full h-full lg:py-0 lg:w-max
             "
          >
             <ul
                class="
-                  w-full flex justify-between font-spartan
+                  w-full h-full flex justify-between items-center font-spartan
                   lg:gap-[33px] lg:justify-start
                "
             >
                <li 
-                  v-for="planet in planets"
+                  v-for="planet in planets" :key="planet.name"
+                  class="lg:h-full lg:flex lg:items-center lg:justify-center"
                >
                   <nuxt-link 
                      :to=" `/planets/${planet.name.toLowerCase()}` "
                      class="
-                        block text-pf-inactive font-bold 
+                        pt-[39px] pb-[27px]
+                        block text-pf-inactive font-bold relative
                         text-[11px] leading-[25px] tracking-[1px]
                         hover:text-white 
-                        lg:text-[14px] 
+                        lg:text-[11px] lg:py-0 
                      "
+                     
                   >
                      {{ planet.name.toUpperCase() }}
+
+                     <!-- ACTIVE PAGE INDICATOR -->
+                     <span class="absolute bottom-0 w-full h-1 block lg:bottom-[unset] lg:top-[-29px]" :style="{ 'background': CHECK_ACTIVE_PAGE(planet.name) }">
+
+                     </span>
                   </nuxt-link>
                </li>
             </ul>
@@ -85,21 +93,42 @@
             return this.$store.state.planets
          },
 
+         planet() {
+            return this.planets.filter(planet => planet.name.toLowerCase() === this.$route.params.planet)[0]
+         },
+
          sideBar() {
             return this.$store.state.sideBar
          }
-      }
+      },
+
+      methods: {
+         CHECK_ACTIVE_PAGE(planetName) {
+            if(this.$route.params.planet === planetName.toLowerCase()) {
+               return this.planet.assets_color
+            }
+            else {
+               return 'transparent'
+            }
+         }
+      },
+
+   
       
    }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
    button.clicked {
      svg {
          & > g {
             fill: rgba(255, 255, 255, 0.5);
          }
      }
+   }
+
+   .nuxt-link-active {
+      color: white
    }
 </style>
 
