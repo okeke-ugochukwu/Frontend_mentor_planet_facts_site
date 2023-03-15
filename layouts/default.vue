@@ -1,11 +1,12 @@
 <template>
-  <div class="relative">
+  <div 
+      class="relative"
+  >
       <headerBar />
 
       <sideBar />
 
       <nuxt/>
-
   </div>
 </template>
 
@@ -18,4 +19,5 @@
       },
    }
 </script>
+
 

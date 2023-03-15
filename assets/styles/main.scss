@@ -6,10 +6,13 @@
 @tailwind utilities;
 
 * {
-   outline: 1px solid black;
+//    outline: 1px solid black;
    transition: .3s;
 }
 body {
-   background: rgb(205, 202, 202);
+   background: url('@/assets/imgs/background-stars.svg') #070724;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: top 100px;
 }
    

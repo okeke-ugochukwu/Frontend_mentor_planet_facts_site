@@ -326,20 +326,25 @@
 
 <style scss scoped>
 
-.fade-enter-active,
+.fade-enter-active {
+  transition: all .5s .2s ease;
+}
+
 .fade-leave-active {
-  transition: all .5s ease;
+   transition: all .5s ease;
 }
 
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
+
+
    
 
 .slideFade-enter-active,
 .slideFade-leave-active {
-  transition: all .5s ease;
+  transition: all .5s .1s ease;
 }
 
 .slideFade-enter,
