@@ -12,6 +12,8 @@ export const mutations =  ({
       state.planets = planets_data
    },
 
+   
+
    TOGGLE_SWITCH(state, switchToToggle) {
       state[switchToToggle].isShown ? 
          state[switchToToggle].isShown = false :
