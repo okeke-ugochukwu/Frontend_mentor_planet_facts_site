@@ -28,7 +28,7 @@
 
       methods: {
          SET_STATE() {
-            //CHECK IF THERES DATA IN STATE THEN  ACT ACCORDINGLY
+            //CHECK IF THERES DATA IN STATE THEN ACT ACCORDINGLY
             this.$store.state.planets.length === 0?
                GET_PLANETS(this.$store) : console.log('Data in store')
          }

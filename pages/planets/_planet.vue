@@ -214,7 +214,11 @@
 
       head() {
          return {
-            title: `Planets Fact | ${this.planet.name}`
+            title: `Planets Fact | ${this.planet.name}`,
+
+            meta: [
+               
+            ]
          }       
       },
 
