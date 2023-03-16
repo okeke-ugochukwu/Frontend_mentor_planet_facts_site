@@ -24,7 +24,7 @@ export default {
       { hid: 'og:title', property: 'og:title', content: 'Planets Fact Site' },
       { hid: 'og:description', property: 'og:description', content: 'Frontend Mentor Challenge' },
       { hid: 'og:url', property: 'og:url', content: 'https://okeke-ugochukwu.github.io/Frontend_mentor_planet_facts_site' },
-      { hid: '', property: '', content: '' },
+      { hid: 'og:image', property: 'og:image', content: 'https://raw.githubusercontent.com/okeke-ugochukwu/Frontend_mentor_planet_facts_site/ssg_/static/og-image.png' },
       { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
       { hid: 'og:image:height', property: 'og:image:height', content: '717' },
       { hid: 'og:image:alt', property: 'og:image:alt', content: 'Website Image Snippet' },
@@ -32,9 +32,9 @@ export default {
 
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       { hid: 'twitter:title', name: 'twitter:title', content: 'Planets Fact Site' },
-      { hid: 'twitter:description', name: 'twitter:description', content: 'Frontedn Mentor Challenge' },
+      { hid: 'twitter:description', name: 'twitter:description', content: 'Frontend Mentor Challenge' },
       { hid: 'twitter:url', name: 'twitter:url', content: 'https://okeke-ugochukwu.github.io/Frontend_mentor_planet_facts_site' },
-      { hid: 'twitter:image', name: 'twitter:image', content: '#070724' },
+      { hid: 'twitter:image', name: 'twitter:image', content: 'https://raw.githubusercontent.com/okeke-ugochukwu/Frontend_mentor_planet_facts_site/ssg_/static/og-image.png' },
     ],
     
     link: [
