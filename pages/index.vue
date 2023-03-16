@@ -12,7 +12,7 @@
 
       data() {
          return {
-            db: require('/data/db.json'),
+            // db: require('/data/db.json'),
          }
       },
 

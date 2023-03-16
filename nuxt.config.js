@@ -1,6 +1,10 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-//   target: 'static',
+  target: 'static',
+  ssr: false,
+  router: {
+   base: '/Frontend_mentor_planet_facts_site/'
+ },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

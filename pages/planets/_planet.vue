@@ -222,16 +222,18 @@
          }       
       },
 
+      data() {
+         return {
+            planetName: null,
+         }
+      },
+
       async asyncData({ params }) {
          const planetName = params.planet
          
          return { planetName }
       },
-
-      async fetch() {
-         this.SET_STATE();
-      },
-
+      
       data() {
          return {
             activeTab: 'overview',
@@ -263,15 +265,7 @@
          }
       },
 
-      methods: {
-         SET_STATE() {
-
-            //CHECK IF THERES DATA IN STATE THEN  ACT ACCORDINGLY
-            this.$store.state.planets.length === 0?
-               GET_PLANETS(this.$store) : console.log('Data in store')
-               
-         },
-         
+      methods: {   
          UPDATE_TAB_IN_VIEW(tabObject) {
 
             //CHECK IF TAB IS ALREAY ACTIVE
