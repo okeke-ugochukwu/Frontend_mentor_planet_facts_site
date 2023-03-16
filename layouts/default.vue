@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <main 
       class="relative"
   >
       <headerBar />
@@ -7,7 +7,7 @@
       <sideBar />
 
       <nuxt/>
-  </div>
+  </main>
 </template>
 
 <script>

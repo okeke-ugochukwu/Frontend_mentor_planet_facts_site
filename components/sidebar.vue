@@ -3,6 +3,7 @@
       class="
          absolute top-[68px] z-10
          h-[calc(100vh-68px)] pt-6 w-full ml-[-100%] 
+         bg-pf-deep-blue
       "
       :class="{'open': sideBar.isShown}"
    >  
