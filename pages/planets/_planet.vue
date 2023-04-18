@@ -111,7 +111,7 @@
                         ref="tabContent"
                         class="
                            font-spartan font-normal text-[14px] leading-[22px] mb-8
-                           lg:text-[18px] lg:leading-[25px] lg:mb-6
+                           lg:text-[18px] lg:leading-[25px]
                         "
                      >
                         {{ planet[activeTab].content }}

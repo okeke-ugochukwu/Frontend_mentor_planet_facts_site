@@ -49,9 +49,9 @@
                      class="
                         pt-[39px] pb-[27px]
                         block text-pf-inactive font-bold relative
-                        text-[11px] leading-[25px] tracking-[1px]
+                        text-[11px] leading-[25px] tracking-[1.5px]
                         hover:text-white 
-                        lg:text-[11px] lg:py-0 
+                        lg:text-[13px] lg:py-0 
                      "
                      
                   >
